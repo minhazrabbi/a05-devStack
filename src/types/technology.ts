@@ -5,6 +5,6 @@ export type Technology = {
   skillLevel: string;
   description: string;
   rating: number;
-  badges: string;
+  badge: string;
   logo: string;
 };
