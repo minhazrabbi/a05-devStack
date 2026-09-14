@@ -5,7 +5,7 @@ const Hero = () => {
     <section className="px-[8%] py-16 md:py-20 lg:py-24">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
         <div className="w-full md:w-1/2">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-slate-950">
+          <h1 className="text-5xl md:text-6xl lg:text-6xl font-bold leading-tight text-slate-950">
             Build Your Ideal{" "}
             <span className="block bg-linear-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent">
               Development Stack

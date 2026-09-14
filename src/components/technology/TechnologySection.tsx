@@ -1,21 +1,37 @@
 import { useEffect, useState } from "react";
 import TechnologyCard from "./TechnologyCard";
+import Cart from "../cart/Cart";
+
 import type { Technology } from "../../types/technology";
 
-const TechnologySection = () => {
+type TechnologySectionProps = {
+  stack: Technology[];
+  onAddToStack: (technology: Technology) => void;
+  onRemoveFromStack: (id: number) => void;
+};
+
+const TechnologySection = ({
+  stack,
+  onAddToStack,
+  onRemoveFromStack,
+}: TechnologySectionProps) => {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
 
   useEffect(() => {
     const loadTechnologies = async () => {
-      const response = await fetch("/data/technologies.json");
+      try {
+        const response = await fetch("/data/technologies.json");
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch technologies");
+        if (!response.ok) {
+          throw new Error("Failed to fetch technologies");
+        }
+
+        const data: Technology[] = await response.json();
+
+        setTechnologies(data);
+      } catch (error) {
+        console.error(error);
       }
-
-      const data: Technology[] = await response.json();
-
-      setTechnologies(data);
     };
 
     loadTechnologies();
@@ -23,20 +39,29 @@ const TechnologySection = () => {
 
   return (
     <section className="px-[8%] py-20">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
-          Build Your Technology Stack
+      <div className="mb-10">
+        <h2 className="text-3xl font-bold text-slate-900">
+          Explore the Technologies
         </h2>
 
-        <p className="mt-4 text-slate-500 max-w-2xl mx-auto">
-          Explore technologies and choose the tools that fit your project.
+        <p className="mt-2 text-slate-500">
+          Pick one technology per category to build your ideal stack.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {technologies.map((technology) => (
-          <TechnologyCard key={technology.id} technology={technology} />
-        ))}
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_320px]">
+        {/* Technology Area */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {technologies.map((technology) => (
+            <TechnologyCard
+              key={technology.id}
+              technology={technology}
+              onAddToStack={onAddToStack}
+            />
+          ))}
+        </div>
+
+        <Cart stack={stack} onRemoveFromStack={onRemoveFromStack} />
       </div>
     </section>
   );

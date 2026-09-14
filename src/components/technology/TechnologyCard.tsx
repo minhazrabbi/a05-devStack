@@ -2,9 +2,10 @@ import type { Technology } from "../../types/technology";
 
 type TechnologyCardProps = {
   technology: Technology;
+  onAddToStack: (technology: Technology) => void;
 };
 
-const TechnologyCard = ({ technology }: TechnologyCardProps) => {
+const TechnologyCard = ({ technology, onAddToStack }: TechnologyCardProps) => {
   return (
     <article className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex items-start justify-between">
@@ -40,6 +41,7 @@ const TechnologyCard = ({ technology }: TechnologyCardProps) => {
 
       <button
         type="button"
+        onClick={() => onAddToStack(technology)}
         className="mt-6 w-full rounded-xl bg-black px-5 py-3 font-medium text-white transition-colors hover:bg-pink-700"
       >
         Add to Stack
