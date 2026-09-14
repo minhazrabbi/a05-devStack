@@ -2,7 +2,7 @@ import logoText from "../../assets/logo-text.png";
 import hamburger from "../../assets/hamburger.png";
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between h-24 px-[8%] border-b border-gray-200 bg-white">
+    <nav className="sticky top-0 z-50 flex h-24 items-center justify-between border-b border-slate-200 bg-white px-[8%]">
       <img src={logoText} alt="DevStack" className="w-40" />
       <ul className="hidden md:flex items-center gap-9">
         <li>
